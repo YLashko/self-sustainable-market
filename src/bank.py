@@ -1,14 +1,23 @@
 class Bank:
-    def __init__(self, starting_budget, comission_function) -> None:
+    def __init__(self, starting_budget, commission_function) -> None:
         self.budget = starting_budget
         self.total_transaction_saldo = 0
-        self.comission_function = comission_function
+        self.commission_function = commission_function
         self.products_list = []
-        self.comission = 0
-    
-    def adjust_comission(self):
-        self.comission = self.comission_function(self.total_transaction_saldo)
-    
-    def publish_offer(self, seller, product):
-        ...
+        self.commission = 0
 
+    def adjust_commission(self):
+        self.commission = self.commission_function(self.total_transaction_saldo)
+
+    def publish_offer(self, seller, product):
+        self.products_list.append((seller, product))
+
+    def clear_products_list(self):
+        self.products_list.clear()
+
+    def update_transactions(self, transaction_amount):
+        self.total_transaction_saldo += transaction_amount
+        self.adjust_commission()
+
+    def get_commission(self):
+        return self.commission
