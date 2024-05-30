@@ -5,9 +5,11 @@ class Product:
         self.is_luxury = is_luxury
         self.amount = starting_amount
         self.price = 0
+        self.margin_multiplier = 0
 
     def set_margin_multiplier(self, margin_multiplier):
         self.price = self.production_cost * margin_multiplier
+        self.margin_multiplier = margin_multiplier
 
     def get_sell_margin(self, sell_price):
         return sell_price - self.production_cost
