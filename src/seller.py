@@ -3,7 +3,7 @@ from product import Product
 
 class Seller:
     def __init__(self, name, production_product, starting_budget, production_speed, demand_product, margin_function,
-                 demand_function, bank, starting_demand: float = 10, consume_speed: float = 40) -> None:
+                 demand_function, bank, starting_demand: float = 10, consume_speed: float = 25) -> None:
         self.name = name
         self.product: Product = production_product
         self.budget = starting_budget

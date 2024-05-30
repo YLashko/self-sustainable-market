@@ -58,7 +58,7 @@ class Market:
         self.avg_product_price = sum([seller.product.price for seller in self.sellers]) / len(self.sellers)
         inflation = self.avg_product_price / prev_avg_product_price
 
-        print(f"DAY {self.day} | Transaction saldo: {total_saldo:.2f}\t | Difference: {difference:.2f}\t | Comission: {inflation:.4f}\t | Budget: {budget:.4f}\t | Inflation: {(inflation - 1) * 100:.2f}%")
+        print(f"DAY {self.day} | Transaction saldo: {total_saldo:.2f}\t | Difference: {difference:.2f}\t | Comission: {self.bank.commission * 100:.4f}%\t | Budget: {budget:.4f}\t | Inflation: {(inflation - 1) * 100:.2f}%")
         # print("".join([str(seller.budget) + "\t" for seller in self.sellers]))
 
     def run_simulation(self, days):
@@ -68,15 +68,15 @@ class Market:
 if __name__ == '__main__':
     bank = Bank(10000, CommissionFunctions.exp_commission())
     sellers = [
-        Seller("Seller1", Product("Necessity", 10, False, 10), 5000, 5, Product("Luxury", 50, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 15),
-        Seller("Seller2", Product("Necessity", 7, False, 7), 1000, 4, Product("Luxury", 55, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 15),
-        Seller("Seller3", Product("Luxury", 50, True, 5), 1600, 4, Product("Necessity", 13, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank),
-        Seller("Seller4", Product("Necessity", 12, False, 5), 2000, 4, Product("Luxury", 55, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 15),
-        Seller("Seller5", Product("Luxury", 50, True, 6), 2600, 4, Product("Necessity", 10, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank),
-        Seller("Seller6", Product("Necessity", 12, False, 2), 1600, 4, Product("Luxury", 55, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 15),
-        Seller("Seller7", Product("Luxury", 46, True, 5), 2600, 4, Product("Necessity", 9, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank)
+        Seller("Seller1", Product("Necessity", 10, False, 10), 5000, 5, Product("Luxury", 35, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 5),
+        Seller("Seller2", Product("Necessity", 7, False, 7), 1000, 4, Product("Luxury", 36, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 5),
+        Seller("Seller3", Product("Luxury", 51, True, 5), 1600, 4, Product("Necessity", 13, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank),
+        Seller("Seller4", Product("Necessity", 12, False, 5), 2000, 4, Product("Luxury", 41, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 5),
+        Seller("Seller5", Product("Luxury", 50, True, 6), 2600, 4, Product("Necessity", 11, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank),
+        Seller("Seller6", Product("Necessity", 12, False, 2), 1600, 4, Product("Luxury", 32, True, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank, 10, 5),
+        Seller("Seller7", Product("Luxury", 49, True, 5), 2600, 4, Product("Necessity", 12, False, 0), MarginFunctions.mul_inverse(), DemandFunctions.sqrt_demand(), bank)
     ]
 
     market = Market(sellers, bank)
-    market.run_simulation(500)
+    market.run_simulation(5000)
 

@@ -36,7 +36,7 @@ class Bank:
         chosen_product.amount -= buy_amount
         buyer.demand_product.amount -= buy_amount
         seller.budget += buy_price / (1 + self.commission)
-        buyer.budget -= buy_price / (1 + self.commission)
+        buyer.budget -= buy_price
         self.budget += buy_price * self.commission
 
         self.update_transactions_saldo(buy_price)
